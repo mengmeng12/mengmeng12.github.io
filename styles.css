@@ -154,7 +154,7 @@ p { margin: 0; }
 }
 
 .bio {
-  margin-top: 2.25rem;
+  margin-top: 2rem;
   font-size: 1.125rem;
   line-height: 1.7;
 }
@@ -163,9 +163,39 @@ p { margin: 0; }
 .links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
-  margin-top: 2.25rem;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
   font-weight: 500;
+}
+.links .profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--shutter) 30%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--limewash) 70%, transparent);
+  text-decoration: none;
+  line-height: 1.2;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.links .profile:hover {
+  background: var(--lavender-pale);
+  border-color: var(--lavender);
+}
+.links .profile svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+  flex: none;
+}
+.links .plain {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 100%;
+  gap: 0.25rem 1.25rem;
+  margin-top: 0.3rem;
 }
 
 /* ---------- Sections ---------- */
