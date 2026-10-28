@@ -1,122 +1,215 @@
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shuchen Meng</title>
+  <meta name="description" content="Shuchen Meng — M.S. Financial Engineering at NYU Tandon. Quantitative trading, execution research, and market microstructure.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-	<head>
-		<link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">
-		<title>Shuchen Meng's Blog</title>
-		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="keywords" content="Shuchen Meng, Shuchen Meng's blog, economics @Shuchen" />
-		<meta name="description" content="Life & Economics" />
-		<!--加载textillate文字特效库-->
-		<link rel="stylesheet" href="assets/animate.css">
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-		<script src="assets/jquery.lettering.js"></script>
-		<script src="jquery.textillate.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				$('.text1').textillate({ in: { effect: 'flipInX' } });
-				$('.text3').textillate({
-					initialDelay: 9000,
-					in: { effect: 'bounceInDown' }
-				});
-			})
-		</script>
-		<script>
-			(function() {
-				var bp = document.createElement('script');
-				var curProtocol = window.location.protocol.split(':')[0];
-				if(curProtocol === 'https') {
-					bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-				} else {
-					bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-				}
-				var s = document.getElementsByTagName("script")[0];
-				s.parentNode.insertBefore(bp, s);
-			})();
-		</script>
-		<!--添加百度统计-->
-		<script>
-        		var _hmt = _hmt || [];
-        		(function() {
-            			var hm = document.createElement("script");
-            			hm.src = "https://hm.baidu.com/hm.js?a0de0062ecc8e145d335478668581635";
-            			var s = document.getElementsByTagName("script")[0]; 
-            			s.parentNode.insertBefore(hm, s);
-        		})();
-        	</script>
-		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-		<script src="js/skel.min.js"></script>
-		<script src="js/init.js"></script>
-		<noscript>
-			<link rel="stylesheet" href="css/skel.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-wide.css" />
-			<link rel="stylesheet" href="css/style-noscript.css" />
-		</noscript>
-		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-	</head>
-<style>
-.blog_txt{
-	font-size: 22px;
-    color: #000000;
-	font-weight: bold;
-}
-</style>
-	<body class="loading">
-		<div id="wrapper">
-			<div id="bg"></div>
-			<div id="overlay"></div>
-			<div id="main">
+<header class="hero">
+  <div class="hero-inner">
+    <svg class="sprig" viewBox="0 0 120 260" aria-hidden="true">
+      <path class="stem" d="M62 255 C 60 200, 58 150, 64 92 C 67 64, 63 38, 60 14"/>
+      <path class="leaf" d="M61 210 C 44 196, 34 178, 30 160 C 46 170, 56 186, 61 210 Z"/>
+      <g class="buds">
+        <ellipse cx="60" cy="12" rx="4.2" ry="7"/>
+        <ellipse cx="57" cy="22" rx="5" ry="8.5" transform="rotate(-18 57 22)"/>
+        <ellipse cx="64" cy="24" rx="5" ry="8.5" transform="rotate(18 64 24)"/>
+        <ellipse cx="57.5" cy="36" rx="5.4" ry="9" transform="rotate(-20 57.5 36)"/>
+        <ellipse cx="65.5" cy="38" rx="5.4" ry="9" transform="rotate(20 65.5 38)"/>
+        <ellipse cx="59" cy="51" rx="5.6" ry="9.2" transform="rotate(-22 59 51)"/>
+        <ellipse cx="67.5" cy="53" rx="5.6" ry="9.2" transform="rotate(22 67.5 53)"/>
+        <ellipse cx="60.5" cy="67" rx="5.6" ry="9.2" transform="rotate(-24 60.5 67)"/>
+        <ellipse cx="69" cy="70" rx="5.6" ry="9.2" transform="rotate(24 69 70)"/>
+      </g>
+    </svg>
 
-				<!-- Header -->
-				<header id="header" style="height:70vh;">
-					<div align="center">
-						<img src="css/images/portrait.jpg" style="width:100px; height:100px; border-radius:50%; overflow:hidden;" />
-					</div>
-					<!--<h2>一月筠</h2>-->
-					<font class="text1" style="text-align: center; text-decoration: none; color: white; font: '微软雅黑'; font-size: 24px;">Shuchen Meng</font>
-					<p class="text3" align="center">Life & Economics</p>
-					<nav>
-						<ul>
-							<li>
-								<div>
-								<span  class="blog_txt">BLOG</span>
-								<a href="blog/" class="fa  fa-pencil-square-o" style="color:mediumspringgreen"><span>Blog</span></a>
-								</div>
-							</li>
-							<li>
-								<span class="blog_txt">CV</span>
-								<a href="blog/about/" class="fa fa-id-card-o"><span>CV</span></a>
-								
-							
-							</li>
-							<li>
-								<span class="blog_txt">Project</span>
-								<a href="blog/categories/projects/" class="fa fa-bar-chart"><span>Project</span></a>
-							
-							</li>
-							<li>
-								<span class="blog_txt">GitHub</span>
-								<a href="https://github.com/mengmeng12" class="fa fa-github"><span>Github</span></a>
-						
-							</li>
-							<li>
-								<span class="blog_txt">BOOK</span>
-								<a href="blog/categories/book/" class="fa fa-book"><span>Book</span></a>
+    <h1 class="name">Shuchen Meng</h1>
+    <p class="role">M.S. Financial Engineering, NYU Tandon, 2027</p>
 
-							</li>
-						</ul>
-					</nav>
-				</header>
-				<footer id="footer">
-					<div style="text-align:center;">
-						Powered by Shuchen Meng
-					</div>
-				</footer>
-			</div>
-		</div>
-	</body>
+    <div class="bio">
+      <p>I work on quantitative trading, execution, and market microstructure.</p>
+      <p>After graduate school I turned down offers in Beijing and went home to Henan, to the Trading Department of the Zhengzhou Commodity Exchange. For four years I watched how futures and options markets really trade: where liquidity comes from, what slippage costs, and which incentives keep market makers quoting through a hard day. I was promoted twice there, from an entry-level role to Manager. The lesson that stayed with me is that behavior which looks irrational from outside is often rational under limits we can't see, and one participant's forced unwind is another participant's shock.</p>
+      <p>Now I build the other side of that picture: execution engines, market-making simulators, and regime-aware portfolios. I like work that answers back quickly and honestly, and markets do. I'm looking for full-time roles in quantitative research, trading, and execution starting in 2027.</p>
+    </div>
 
+    <p class="personal">Away from the screen I run. Running taught me that progress is rarely linear, and that a plateau usually means changing the training, not the goal. It has carried me from Henan to Beijing to New York, and I'd like to keep going.</p>
+
+    <nav class="links" aria-label="Contact and profiles">
+      <a href="mailto:sm13533@nyu.edu">Email</a>
+      <a href="cv/Shuchen_Meng_CV.pdf">CV</a>
+      <a href="https://www.linkedin.com/in/shuchen-meng/">LinkedIn</a>
+      <a href="https://github.com/mengmeng12">GitHub</a>
+      <a href="https://scholar.google.com/citations?user=VvL7s1kAAAAJ">Google Scholar</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section id="research">
+    <div class="section-head">
+      <h2>Research</h2>
+      <p class="aside">Cited 300+ times on <a href="https://scholar.google.com/citations?user=VvL7s1kAAAAJ">Google Scholar</a></p>
+    </div>
+
+    <h3 class="group">AI and financial markets <span>working papers, 2026</span></h3>
+    <ol class="papers">
+      <li>
+        <p class="title">Artificial Intelligence and Systemic Risk: A Unified Model of Performative Prediction, Algorithmic Herding, and Cognitive Dependency in Financial Markets</p>
+        <p class="authors"><b>S. Meng</b>, X. Chen</p>
+        <p class="venue"><a href="https://arxiv.org/abs/2604.03272">arXiv:2604.03272</a></p>
+      </li>
+      <li>
+        <p class="title">AI-Driven Alpha Decay: Algorithmic Homogenization, Reflexive Signal Erosion, and the Paradox of Intelligent Markets</p>
+        <p class="authors"><b>S. Meng</b>, X. Chen</p>
+        <p class="venue"><a href="https://arxiv.org/abs/2605.23905">arXiv:2605.23905</a></p>
+      </li>
+      <li>
+        <p class="title">When AI Levels the Playing Field: Skill Homogenization, Asset Concentration, and Two Regimes of Inequality</p>
+        <p class="authors">X. Chen, <b>S. Meng</b></p>
+        <p class="venue"><a href="https://arxiv.org/abs/2603.05565">arXiv:2603.05565</a></p>
+      </li>
+      <li>
+        <p class="title">Cognitive Debt: AI as Intellectual Leverage and the Dynamics of Systemic Fragility</p>
+        <p class="authors"><b>S. Meng</b></p>
+        <p class="venue">Working paper, <a href="https://github.com/mengmeng12/cognitive_debt-AI-hidden-cost">source on GitHub</a></p>
+      </li>
+    </ol>
+
+    <h3 class="group">Machine learning for forecasting and risk <span>2024</span></h3>
+    <ol class="papers">
+      <li>
+        <p class="title">Enhancing Exchange Rate Forecasting with Explainable Deep Learning Models</p>
+        <p class="authors"><b>S. Meng</b>, A. Chen, C. Wang, M. Zheng, F. Wu, X. Chen, H. Ni, P. Li</p>
+        <p class="venue"><i>4th International Conference on Electronic Information Engineering and Computer Science (EIECS)</i>, <a href="https://scholar.google.com/citations?view_op=view_citation&amp;user=VvL7s1kAAAAJ&amp;citation_for_view=VvL7s1kAAAAJ:9yKSN-GCB0IC">Scholar entry</a></p>
+      </li>
+      <li>
+        <p class="title">Harnessing Earnings Reports for Stock Predictions: A QLoRA-Enhanced LLM Approach</p>
+        <p class="authors">H. Ni, <b>S. Meng</b>, X. Chen, Z. Zhao, A. Chen, P. Li, S. Zhang, Q. Yin, Y. Wang, et al.</p>
+        <p class="venue"><i>6th International Conference on Data-driven Optimization of Complex Systems (DOCS)</i>, <a href="https://arxiv.org/abs/2408.06634">arXiv:2408.06634</a></p>
+      </li>
+      <li>
+        <p class="title">Advanced User Credit Risk Prediction Model Using LightGBM, XGBoost and TabNet with SMOTEENN</p>
+        <p class="authors">C. Yu, Y. Jin, Q. Xing, Y. Zhang, S. Guo, <b>S. Meng</b></p>
+        <p class="venue"><i>IEEE 6th International Conference on Power, Intelligent Computing and Systems (ICPICS)</i>, <a href="https://arxiv.org/abs/2408.03497">arXiv:2408.03497</a></p>
+      </li>
+      <li>
+        <p class="title">Time Series Modeling for Heart Rate Prediction: From ARIMA to Transformers</p>
+        <p class="authors">H. Ni, <b>S. Meng</b>, X. Geng, P. Li, Z. Li, X. Chen, X. Wang, S. Zhang</p>
+        <p class="venue"><a href="https://arxiv.org/abs/2406.12199">arXiv:2406.12199</a></p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">
+      <h2>Projects</h2>
+    </div>
+
+    <ul class="projects">
+      <li>
+        <h3>Regime-aware multi-strategy trading and execution platform</h3>
+        <p>A team build that decides how much risk a set of concentrated strategies should carry, and how to execute it. We compared macro/half-life, rule-based, and Gaussian HMM regime classifiers; a sticky prior with an asymmetric three-day dwell cut regime switches from 243 to 14 while keeping all 106 defensive days. Exposure is set by three continuous risk scalars (portfolio covariance, strategy health, execution conditions) and routed through a one-minute parent/child order simulator, then reconciled against Alpaca paper trading.</p>
+        <p class="meta">Python, HMM, execution simulation, 2026. Industry-sponsored capstone; the code lives in a private repository managed by the program.</p>
+      </li>
+      <li>
+        <h3><a href="https://github.com/mengmeng12/VWAP-execution-research-project">VWAP execution research engine</a></h3>
+        <p>A multithreaded C++ engine that builds 15-minute intraday volume profiles from more than 2&nbsp;GB of SPY tick data with MapReduce-style aggregation, then schedules a 50,000-share parent order across the day. Benchmarked against market VWAP, the baseline schedule lands at 5.14&nbsp;bps of implementation shortfall.</p>
+        <p class="meta">C++, multithreading, 2026</p>
+      </li>
+      <li>
+        <h3><a href="https://github.com/mengmeng12/avellaneda-stoikov-market-making">Avellaneda–Stoikov market making on intraday replay</a></h3>
+        <p>An inventory-aware market maker replayed on real AAPL, MSFT, and NVDA intraday paths and compared with a fixed-spread quoter. Skewing quotes by inventory cut average absolute inventory by roughly 82–88%.</p>
+        <p class="meta">Python, stochastic control, 2026</p>
+      </li>
+      <li>
+        <h3><a href="https://github.com/mengmeng12/smollm2-quant-tool-use-RFT">Teaching a small LLM to call a Black–Scholes pricer</a></h3>
+        <p>A reinforcement fine-tuning pipeline (LoRA SFT, GRPO, DPO ablation) for SmolLM2-135M on leakage-controlled synthetic data. The model reaches 94.8% exact tool-call success and 97.5% routing accuracy, and false-positive tool use falls from 85% to 5%.</p>
+        <p class="meta">PyTorch, reinforcement fine-tuning, 2026</p>
+      </li>
+      <li>
+        <h3><a href="https://github.com/mengmeng12/financial-phrasebank-distilbert-study">Financial sentiment with DistilBERT</a></h3>
+        <p>Five fine-tuning regimes on Financial PhraseBank, from a frozen backbone to LoRA, with calibration, ensembling, and significance tests to explain why macro-F1 stalls near 0.95.</p>
+        <p class="meta">PyTorch, NLP, 2026</p>
+      </li>
+    </ul>
+  </section>
+
+  <section id="experience">
+    <div class="section-head">
+      <h2>Experience</h2>
+    </div>
+    <dl class="timeline">
+      <div class="row">
+        <dt>2021–2025</dt>
+        <dd>
+          <h3>Zhengzhou Commodity Exchange</h3>
+          <p class="sub">Trading Department, promoted twice to Manager (Level II)</p>
+          <p>Researched derivatives microstructure and wrote the monthly and annual reports on futures and options liquidity, slippage, P&amp;L, and hedge ratios. Set market-making quoting obligations and incentives against liquidity targets, and ran market-maker admissions and compliance reviews.</p>
+        </dd>
+      </div>
+      <div class="row">
+        <dt>2020</dt>
+        <dd>
+          <h3>CITIC Construction Investment Securities</h3>
+          <p class="sub">Summer intern, Strategy Research Group</p>
+          <p>Built two research databases for financial-market and CPI commentary and supported thematic research on import substitution, sector funds, and high-dividend equities.</p>
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section id="education">
+    <div class="section-head">
+      <h2>Education</h2>
+    </div>
+    <dl class="timeline">
+      <div class="row">
+        <dt>2025–2027</dt>
+        <dd>
+          <h3>New York University, Tandon School of Engineering</h3>
+          <p class="sub">M.S. in Financial Engineering, GPA 3.7/4.0</p>
+          <!-- Selected coursework: to be filled in later -->
+        </dd>
+      </div>
+      <div class="row">
+        <dt>2019–2021</dt>
+        <dd>
+          <h3>Central University of Finance and Economics</h3>
+          <p class="sub">Master of Finance, Chinese Academy of Finance and Development, GPA 3.8/4.0</p>
+          <ul class="honors">
+            <li>Summa Cum Laude, 2021</li>
+          </ul>
+        </dd>
+      </div>
+      <div class="row">
+        <dt>2015–2019</dt>
+        <dd>
+          <h3>China Agricultural University</h3>
+          <p class="sub">B.Econ. in Finance, GPA 3.8/4.0</p>
+          <ul class="honors">
+            <li>Meritorious Winner, Mathematical Contest in Modeling (MCM), 2018</li>
+            <li>Second Prize, Beijing College Students Mathematics Competition, 2016</li>
+            <li>Academic Excellence Scholarship, every year of study</li>
+          </ul>
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+</main>
+
+<footer>
+  <p>Shuchen Meng, New York</p>
+</footer>
+
+</body>
 </html>
