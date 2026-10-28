@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teaching a small LLM to call a Black–Scholes pricer | Shuchen Meng</title>
+  <meta name="description" content="Can a 135-million-parameter model learn to call a pricing tool correctly, with the right units, and learn just as well when not to call it?">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=Parisienne&family=Playfair+Display:ital,wght@1,400&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=10">
+</head>
+<body>
+
+<header class="page-head">
+  <nav class="site-nav" aria-label="Site">
+    <a class="home" href="/">Shuchen Meng</a>
+    <ul>
+      <li><a href="/research/">Research</a></li>
+      <li><a href="/projects/" aria-current="page">Projects</a></li>
+      <li><a href="/experience/">Experience</a></li>
+      <li><a href="/education/">Education</a></li>
+      <li><a href="/statement/">Statement</a></li>
+      <li><a href="/glance/">At a glance</a></li>
+    </ul>
+  </nav>
+  <div class="page-title">
+    <p class="crumb"><a href="/projects/">Projects</a></p>
+    <h1>Teaching a small LLM to call a Black–Scholes pricer</h1>
+    <p class="lede">Can a 135-million-parameter model learn to call a pricing tool correctly, with the right units, and learn just as well when not to call it?</p>
+    <p class="meta">PyTorch, Transformers, TRL, LoRA, GRPO, DPO, 2026. <a href="https://github.com/mengmeng12/smollm2-quant-tool-use-RFT">Code on GitHub</a></p>
+  </div>
+</header>
+
+<main>
+  <article class="doc">
+    <dl class="stats">
+      <div><dt>exact tool-call success, unit-normalized prompts</dt><dd>94.8%</dd></div>
+      <div><dt>routing accuracy, tool vs. no tool</dt><dd>97.5%</dd></div>
+      <div><dt>false-positive tool calls after selective SFT</dt><dd>85% → 5%</dd></div>
+    </dl>
+
+    <h2>The question</h2>
+    <p>The target is a structured call such as <code>bs(S=100, K=110, T=0.5, r=0.05, sigma=0.2, type="call")</code>. Getting the format right is the easy part. The hard parts are converting "5%", "six months", or "90 days" into the right arguments, and not reaching for the tool when the question has nothing to do with option pricing.</p>
+
+    <h2>Approach</h2>
+    <ul>
+      <li><b>Two synthetic data layers.</b> Layer 1 teaches format and argument extraction with standard units. Layer 2 mixes rates, volatilities, and maturities across decimals, percent signs, percent words, years, months, and days, a full 3×3×3 grid of 27 unit combinations.</li>
+      <li><b>Leakage control.</b> Train, validation, and test are split at the level of the underlying scenario, so the same option never appears in two splits under different wording.</li>
+      <li><b>Dense, interpretable reward.</b> A restricted AST parser grades format, parseability, function name, required arguments, safe values, numeric correctness, and option type separately.</li>
+      <li><b>Training.</b> LoRA supervised fine-tuning, then GRPO, with a DPO ablation and a comparison against the 360M model.</li>
+      <li><b>Over-tooling.</b> A separate benchmark of prompts that should not trigger the tool, and a mixed selective SFT set to fix it. Paired bootstrap intervals guard against over-reading small differences.</li>
+    </ul>
+
+    <h2>Results</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Stage</th><th>Avg reward</th><th>Exact success</th></tr></thead>
+        <tbody>
+          <tr><td>Layer 1 model on Layer 2 prompts</td><td>0.803</td><td>3.7%</td></tr>
+          <tr><td>Layer 2 SFT (135M)</td><td>0.988</td><td>94.8%</td></tr>
+          <tr><td>Layer 2 GRPO (135M)</td><td>0.981</td><td>90.4%</td></tr>
+          <tr><td>Layer 2 SFT (360M)</td><td>0.998</td><td>98.8%</td></tr>
+        </tbody>
+        <caption>Unit-normalized test prompts</caption>
+      </table>
+    </div>
+
+    <h2>What I learned</h2>
+    <ul>
+      <li>Supervised fine-tuning does most of the work of teaching an interface; reinforcement learning on top of a nearly saturated checkpoint did not improve it here.</li>
+      <li>A model that has just learned a tool wants to use it everywhere. Over-tooling was the most practical failure, and targeted SFT fixed it better than mixed GRPO.</li>
+      <li>Some remaining errors are about capacity: the 360M model closes most of the gap.</li>
+    </ul>
+
+    <nav class="pager" aria-label="More projects">
+      <a class="prev" href="/projects/avellaneda-stoikov/">Previous: Avellaneda–Stoikov market making on intraday replay</a>
+      <a class="next" href="/projects/finbert-sentiment/">Next: Financial sentiment with DistilBERT</a>
+    </nav>
+  </article>
+</main>
+
+<footer>
+  <p>Shuchen Meng, New York</p>
+</footer>
+
+</body>
+</html>

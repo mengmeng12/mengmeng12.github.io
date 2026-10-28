@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Financial sentiment with DistilBERT | Shuchen Meng</title>
+  <meta name="description" content="How far can a general-purpose DistilBERT go on financial sentiment, and what is behind the ceiling near 0.95 macro-F1?">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=Parisienne&family=Playfair+Display:ital,wght@1,400&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=10">
+</head>
+<body>
+
+<header class="page-head">
+  <nav class="site-nav" aria-label="Site">
+    <a class="home" href="/">Shuchen Meng</a>
+    <ul>
+      <li><a href="/research/">Research</a></li>
+      <li><a href="/projects/" aria-current="page">Projects</a></li>
+      <li><a href="/experience/">Experience</a></li>
+      <li><a href="/education/">Education</a></li>
+      <li><a href="/statement/">Statement</a></li>
+      <li><a href="/glance/">At a glance</a></li>
+    </ul>
+  </nav>
+  <div class="page-title">
+    <p class="crumb"><a href="/projects/">Projects</a></p>
+    <h1>Financial sentiment with DistilBERT</h1>
+    <p class="lede">How far can a general-purpose DistilBERT go on financial sentiment, and what is behind the ceiling near 0.95 macro-F1?</p>
+    <p class="meta">PyTorch, Transformers, LoRA, 2026. <a href="https://github.com/mengmeng12/financial-phrasebank-distilbert-study">Code on GitHub</a></p>
+  </div>
+</header>
+
+<main>
+  <article class="doc">
+    <dl class="stats">
+      <div><dt>test macro-F1, best LoRA ensemble</dt><dd>0.9513</dd></div>
+      <div><dt>fine-tuning regimes compared</dt><dd>5</dd></div>
+      <div><dt>rounds of evidence-driven iteration</dt><dd>4</dd></div>
+    </dl>
+
+    <h2>The question</h2>
+    <p>Financial PhraseBank's all-agree subset is small and clean, so most models land in the same narrow band. The interesting question is not the leaderboard number but what explains the last few points: training regime, tokenizer, ensembling, or the model's general-domain pretraining.</p>
+
+    <h2>Approach</h2>
+    <ul>
+      <li><b>Five regimes.</b> Pretrained baseline, frozen backbone with a trained head, a custom head, full fine-tuning, and LoRA, with trainable-parameter counts tracked for each.</li>
+      <li><b>Four rounds.</b> Minimum viable runs, then changes motivated by validation diagnostics, then statistical checks with paired bootstrap, then multi-seed stability, calibration, ensembles, a vocabulary ablation, and per-sample error forensics.</li>
+    </ul>
+
+    <h2>Results</h2>
+    <ul>
+      <li>LoRA comes close to full fine-tuning with a fraction of the trainable parameters; the best single LoRA run reaches about 0.95 test macro-F1 and the best LoRA ensemble 0.9513.</li>
+      <li>Temperature scaling lowers calibration error without changing accuracy.</li>
+      <li>Larger and mixed ensembles do not move past the best homogeneous ensemble.</li>
+      <li>Adding finance vocabulary to the tokenizer changes results only within seed noise.</li>
+    </ul>
+
+    <h2>What I learned</h2>
+    <p>With one 70/15/15 split of a small dataset, the bootstrap interval is wide enough that round-to-round gains should not be over-claimed. The errors every model gets wrong seem to need knowledge of financial discourse, which points to a pretraining-domain gap rather than anything fine-tuning can fix.</p>
+
+    <nav class="pager" aria-label="More projects">
+      <a class="prev" href="/projects/smollm2-tool-use/">Previous: Teaching a small LLM to call a Black–Scholes pricer</a>
+    </nav>
+  </article>
+</main>
+
+<footer>
+  <p>Shuchen Meng, New York</p>
+</footer>
+
+</body>
+</html>

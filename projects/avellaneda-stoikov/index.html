@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Avellaneda–Stoikov market making on intraday replay | Shuchen Meng</title>
+  <meta name="description" content="How should a market maker move its quotes as inventory builds up, and does inventory-aware quoting actually control risk on real intraday price paths?">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=Parisienne&family=Playfair+Display:ital,wght@1,400&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=10">
+</head>
+<body>
+
+<header class="page-head">
+  <nav class="site-nav" aria-label="Site">
+    <a class="home" href="/">Shuchen Meng</a>
+    <ul>
+      <li><a href="/research/">Research</a></li>
+      <li><a href="/projects/" aria-current="page">Projects</a></li>
+      <li><a href="/experience/">Experience</a></li>
+      <li><a href="/education/">Education</a></li>
+      <li><a href="/statement/">Statement</a></li>
+      <li><a href="/glance/">At a glance</a></li>
+    </ul>
+  </nav>
+  <div class="page-title">
+    <p class="crumb"><a href="/projects/">Projects</a></p>
+    <h1>Avellaneda–Stoikov market making on intraday replay</h1>
+    <p class="lede">How should a market maker move its quotes as inventory builds up, and does inventory-aware quoting actually control risk on real intraday price paths?</p>
+    <p class="meta">Python, stochastic control, EODHD intraday data, 2026. <a href="https://github.com/mengmeng12/avellaneda-stoikov-market-making">Code on GitHub</a></p>
+  </div>
+</header>
+
+<main>
+  <article class="doc">
+    <dl class="stats">
+      <div><dt>average |inventory| vs. fixed spread, AAPL</dt><dd>−82%</dd></div>
+      <div><dt>average |inventory| vs. fixed spread, MSFT</dt><dd>−88%</dd></div>
+      <div><dt>average |inventory| vs. fixed spread, NVDA</dt><dd>−50%</dd></div>
+    </dl>
+
+    <h2>The question</h2>
+    <p>The Avellaneda–Stoikov model shifts a market maker's reservation price against its inventory: long inventory pushes quotes down to encourage selling, short inventory pushes them up. The project starts from a pure Brownian simulation and replaces the simulated path with real one-minute bars, to see how the idea behaves on actual prices.</p>
+
+    <h2>Approach</h2>
+    <ul>
+      <li><b>Data.</b> One-minute regular-session bars for AAPL, MSFT, and NVDA on 29 May 2026, with the bar close as a mid-price proxy.</li>
+      <li><b>Calibration.</b> Starting price, bar interval, and volatility come from each ticker's path; risk aversion, fill-intensity parameters, and the inventory limit are held as controlled assumptions, because bars cannot reveal true order arrival rates.</li>
+      <li><b>Fills.</b> Both strategies share the same fill model, <code>λ(δ) = A·e<sup>−kδ</sup></code>: quotes closer to mid fill more often.</li>
+      <li><b>Benchmark.</b> A naive market maker with a fixed half-spread that never adjusts for inventory.</li>
+    </ul>
+
+    <h2>Results</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Ticker</th><th>Day return</th><th>Avg |inv| A–S</th><th>Avg |inv| naive</th><th>P&amp;L A–S</th><th>P&amp;L naive</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>AAPL</td><td>−0.56%</td><td>1.78</td><td>9.85</td><td>−5.17</td><td>51.32</td></tr>
+          <tr><td>MSFT</td><td>+3.03%</td><td>0.88</td><td>7.33</td><td>−19.10</td><td>62.82</td></tr>
+          <tr><td>NVDA</td><td>−0.71%</td><td>1.24</td><td>2.49</td><td>27.14</td><td>39.09</td></tr>
+        </tbody>
+        <caption>One-minute replay, 29 May 2026. P&amp;L in simulation units.</caption>
+      </table>
+    </div>
+    <p>The fixed-spread quoter earned more raw P&amp;L on all three names, but it did so by carrying two to eight times as much inventory. On MSFT, which rose about 3% during the day, much of the naive strategy's profit was directional exposure it never meant to take. NVDA is the honest counterexample: there the inventory-aware strategy was profitable but had the larger drawdown, so the risk-control edge is not automatic.</p>
+
+    <h2>What I learned</h2>
+    <p>Market making should not be judged on final P&amp;L alone. A strategy that earns more by holding a larger position is taking a different risk, not doing the same job better.</p>
+
+    <h2>Next</h2>
+    <p>More sessions and averaged results, parameter sweeps over risk aversion and fill intensity, fees and rebates, and real bid/ask or order-book data so fill rates can be estimated rather than assumed.</p>
+
+    <nav class="pager" aria-label="More projects">
+      <a class="prev" href="/projects/vwap-execution/">Previous: VWAP execution research engine</a>
+      <a class="next" href="/projects/smollm2-tool-use/">Next: Teaching a small LLM to call a Black–Scholes pricer</a>
+    </nav>
+  </article>
+</main>
+
+<footer>
+  <p>Shuchen Meng, New York</p>
+</footer>
+
+</body>
+</html>

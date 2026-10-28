@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Regime-aware multi-strategy trading and execution platform | Shuchen Meng</title>
+  <meta name="description" content="For a set of concentrated strategies: how much risk should the book carry today, and how do you get there without giving it back in execution?">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=Parisienne&family=Playfair+Display:ital,wght@1,400&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=10">
+</head>
+<body>
+
+<header class="page-head">
+  <nav class="site-nav" aria-label="Site">
+    <a class="home" href="/">Shuchen Meng</a>
+    <ul>
+      <li><a href="/research/">Research</a></li>
+      <li><a href="/projects/" aria-current="page">Projects</a></li>
+      <li><a href="/experience/">Experience</a></li>
+      <li><a href="/education/">Education</a></li>
+      <li><a href="/statement/">Statement</a></li>
+      <li><a href="/glance/">At a glance</a></li>
+    </ul>
+  </nav>
+  <div class="page-title">
+    <p class="crumb"><a href="/projects/">Projects</a></p>
+    <h1>Regime-aware multi-strategy trading and execution platform</h1>
+    <p class="lede">For a set of concentrated strategies: how much risk should the book carry today, and how do you get there without giving it back in execution?</p>
+    <p class="meta">Python, Gaussian HMM, execution simulation, Alpaca, 2026. Industry-sponsored capstone.</p>
+  </div>
+</header>
+
+<main>
+  <article class="doc">
+    <dl class="stats">
+      <div><dt>regime switches after the sticky prior and dwell rule</dt><dd>243 → 14</dd></div>
+      <div><dt>defensive days still caught</dt><dd>106 / 106</dd></div>
+      <div><dt>continuous risk scalars driving exposure</dt><dd>3</dd></div>
+    </dl>
+
+    <h2>The question</h2>
+    <p>Regime models are easy to fit and hard to trade. A classifier that flips state every few days produces a portfolio that churns, and every flip costs spread and impact. We wanted a regime signal stable enough to act on, a risk layer that scales exposure smoothly instead of switching it on and off, and an execution layer honest enough to show what the targets would cost.</p>
+
+    <h2>Approach</h2>
+    <ul>
+      <li><b>Regime layer.</b> Compared three classifier families: a macro/half-life model, a feature-rule model, and a Gaussian HMM. A sticky transition prior plus an asymmetric three-day dwell rule cut regime switches from 243 to 14 while still catching all 106 defensive days.</li>
+      <li><b>Risk layer.</b> Three continuous scalars set exposure: portfolio covariance, strategy health, and execution conditions. Separating them lets the platform tell a strategic de-risking from a temporary one, so exposure moves smoothly instead of in steps.</li>
+      <li><b>Execution layer.</b> A one-minute parent/child order simulator with ADV caps, spread impact, partial fills, and synchronized legs for pair trades.</li>
+      <li><b>Paper trading.</b> Risk-adjusted targets are sent to Alpaca paper trading, and broker orders, fills, and positions are reconciled against the simulated execution.</li>
+    </ul>
+
+    <p class="note">This was an industry-sponsored capstone. The code lives in a private repository managed by the program, so this page describes the design and headline results only.</p>
+
+    <nav class="pager" aria-label="More projects">
+      <a class="next" href="/projects/vwap-execution/">Next: VWAP execution research engine</a>
+    </nav>
+  </article>
+</main>
+
+<footer>
+  <p>Shuchen Meng, New York</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects | Shuchen Meng</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=Parisienne&family=Playfair+Display:ital,wght@1,400&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=10">
+</head>
+<body>
+
+<header class="page-head">
+  <nav class="site-nav" aria-label="Site">
+    <a class="home" href="/">Shuchen Meng</a>
+    <ul>
+      <li><a href="/research/">Research</a></li>
+      <li><a href="/projects/" aria-current="page">Projects</a></li>
+      <li><a href="/experience/">Experience</a></li>
+      <li><a href="/education/">Education</a></li>
+      <li><a href="/statement/">Statement</a></li>
+      <li><a href="/glance/">At a glance</a></li>
+    </ul>
+  </nav>
+  <div class="page-title">
+    <h1>Projects</h1>
+    <p class="lede">Execution, market making, regime-aware allocation, and teaching small language models to use quantitative tools. Each project has its own page with the question, the method, and the numbers.</p>
+  </div>
+</header>
+
+<main>
+  <section id="projects">
+    <ul class="projects">
+      <li>
+        <h3><a href="/projects/regime-platform/">Regime-aware multi-strategy trading and execution platform</a></h3>
+        <p>A team build that decides how much risk a set of concentrated strategies should carry, and how to execute it. We compared macro/half-life, rule-based, and Gaussian HMM regime classifiers; a sticky prior with an asymmetric three-day dwell cut regime switches from 243 to 14 while keeping all 106 defensive days. Exposure is set by three continuous risk scalars (portfolio covariance, strategy health, execution conditions) and routed through a one-minute parent/child order simulator, then reconciled against Alpaca paper trading.</p>
+        <p class="meta">Python, HMM, execution simulation, 2026. Industry-sponsored capstone; the code lives in a private repository managed by the program.</p>
+      </li>
+      <li>
+        <h3><a href="/projects/vwap-execution/">VWAP execution research engine</a></h3>
+        <p>A multithreaded C++ engine that builds 15-minute intraday volume profiles from more than 2&nbsp;GB of SPY tick data with MapReduce-style aggregation, then schedules a 50,000-share parent order across the day. Benchmarked against market VWAP, the baseline schedule lands at 5.14&nbsp;bps of implementation shortfall.</p>
+        <p class="meta">C++, multithreading, 2026</p>
+      </li>
+      <li>
+        <h3><a href="/projects/avellaneda-stoikov/">Avellaneda–Stoikov market making on intraday replay</a></h3>
+        <p>An inventory-aware market maker replayed on real AAPL, MSFT, and NVDA intraday paths and compared with a fixed-spread quoter. Skewing quotes by inventory cut average absolute inventory by 82% on AAPL and 88% on MSFT (50% on NVDA), while the fixed-spread quoter earned more raw P&amp;L by carrying that extra inventory.</p>
+        <p class="meta">Python, stochastic control, 2026</p>
+      </li>
+      <li>
+        <h3><a href="/projects/smollm2-tool-use/">Teaching a small LLM to call a Black–Scholes pricer</a></h3>
+        <p>A reinforcement fine-tuning pipeline (LoRA SFT, GRPO, DPO ablation) for SmolLM2-135M on leakage-controlled synthetic data. The model reaches 94.8% exact tool-call success and 97.5% routing accuracy, and false-positive tool use falls from 85% to 5%.</p>
+        <p class="meta">PyTorch, reinforcement fine-tuning, 2026</p>
+      </li>
+      <li>
+        <h3><a href="/projects/finbert-sentiment/">Financial sentiment with DistilBERT</a></h3>
+        <p>Five fine-tuning regimes on Financial PhraseBank, from a frozen backbone to LoRA, with calibration, ensembling, and significance tests to explain why macro-F1 stalls near 0.95.</p>
+        <p class="meta">PyTorch, NLP, 2026</p>
+      </li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <p>Shuchen Meng, New York</p>
+</footer>
+
+</body>
+</html>

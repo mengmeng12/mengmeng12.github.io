@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VWAP execution research engine | Shuchen Meng</title>
+  <meta name="description" content="Given a parent order to buy 50,000 shares of SPY, how should it be spread across the day, and how do you measure whether the schedule did well?">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=Parisienne&family=Playfair+Display:ital,wght@1,400&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=10">
+</head>
+<body>
+
+<header class="page-head">
+  <nav class="site-nav" aria-label="Site">
+    <a class="home" href="/">Shuchen Meng</a>
+    <ul>
+      <li><a href="/research/">Research</a></li>
+      <li><a href="/projects/" aria-current="page">Projects</a></li>
+      <li><a href="/experience/">Experience</a></li>
+      <li><a href="/education/">Education</a></li>
+      <li><a href="/statement/">Statement</a></li>
+      <li><a href="/glance/">At a glance</a></li>
+    </ul>
+  </nav>
+  <div class="page-title">
+    <p class="crumb"><a href="/projects/">Projects</a></p>
+    <h1>VWAP execution research engine</h1>
+    <p class="lede">Given a parent order to buy 50,000 shares of SPY, how should it be spread across the day, and how do you measure whether the schedule did well?</p>
+    <p class="meta">C++, multithreading, CMake, 2026. <a href="https://github.com/mengmeng12/VWAP-execution-research-project">Code on GitHub</a></p>
+  </div>
+</header>
+
+<main>
+  <article class="doc">
+    <dl class="stats">
+      <div><dt>execution cost vs. market VWAP, baseline schedule</dt><dd>5.14 bps</dd></div>
+      <div><dt>extra cost on the 50,000-share order</dt><dd>≈ $3,371</dd></div>
+      <div><dt>SPY trade and quote messages processed</dt><dd>2 GB+</dd></div>
+    </dl>
+
+    <h2>The question</h2>
+    <p>This project is about the execution layer, not alpha. A parent order has already been decided upstream; the job is to split it across the session and judge the result against the market's own volume-weighted price. It started as a large-file processing assignment and is growing into a fuller execution research engine.</p>
+
+    <h2>Approach</h2>
+    <ul>
+      <li><b>MapReduce-style processing in C++.</b> Multiple mapper threads parse a May 2012 SPY trade-and-quote file of more than 2&nbsp;GB, with separate modules for CSV parsing, time handling, aggregation, scheduling, VWAP calculation, and output.</li>
+      <li><b>Historical volume profile.</b> Trades from 1–20 May (14 trading days) are bucketed into 15-minute windows; each bucket's average share of daily volume becomes its weight.</li>
+      <li><b>Schedule.</b> The 50,000-share order is split across 27 buckets in proportion to that profile, and executed on 21 May at each bucket's first trade price (the buy-first baseline).</li>
+      <li><b>Benchmark.</b> The schedule's VWAP is compared with the market VWAP over all trades that day.</li>
+    </ul>
+
+    <h2>Results</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <tbody>
+          <tr><td>My VWAP</td><td>131.210</td></tr>
+          <tr><td>Market VWAP</td><td>131.142</td></tr>
+          <tr><td>Difference</td><td>0.0674 (5.14 bps)</td></tr>
+          <tr><td>Market volume on test date</td><td>169,197,102 shares</td></tr>
+        </tbody>
+        <caption>Buy 50,000 SPY on 21 May 2012, 15-minute volume-profile schedule</caption>
+      </table>
+    </div>
+    <p>For a buy order a higher VWAP means a higher cost, so the baseline paid about 5.14&nbsp;bps over the benchmark, roughly $3,371 on the order. That number is a cost relative to a benchmark, not a trading profit or loss.</p>
+
+    <h2>What I learned</h2>
+    <ul>
+      <li>Time conventions matter as much as the model: the raw timestamps are in GMT, New York was on daylight time, and the final 16:00 bucket carries closing-auction and late prints.</li>
+      <li>A volume profile tells you how much to trade, not at what price. Executing at the first print of each bucket ignores the price path inside it, which is the obvious place to improve.</li>
+    </ul>
+
+    <h2>Next</h2>
+    <p>Tick-aware and regression-based execution prices, quote-aware simulation with bid/ask imbalance, partial fills with carry-over, and a rolling 20-day multi-day backtest with win rate and dispersion of results.</p>
+
+    <nav class="pager" aria-label="More projects">
+      <a class="prev" href="/projects/regime-platform/">Previous: Regime-aware multi-strategy trading and execution platform</a>
+      <a class="next" href="/projects/avellaneda-stoikov/">Next: Avellaneda–Stoikov market making on intraday replay</a>
+    </nav>
+  </article>
+</main>
+
+<footer>
+  <p>Shuchen Meng, New York</p>
+</footer>
+
+</body>
+</html>
