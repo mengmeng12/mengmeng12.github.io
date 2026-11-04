@@ -675,6 +675,13 @@ body.home {
 .home .name { font-size: clamp(3.25rem, 5.4vw, 5.5rem); white-space: nowrap; }
 .home .role { font-size: 1.35rem; }
 .home .bio { max-width: 38rem; margin-top: 1.5rem; }
+.home .tagline {
+  max-width: 34rem;
+  margin-top: 1rem;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
 .home .links .plain { flex-basis: auto; margin: 0 0 0 0.75rem; }
 .home .glance-cta { max-width: 34rem; margin-top: 1.75rem; }
 
