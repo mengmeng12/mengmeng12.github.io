@@ -837,3 +837,52 @@ body.home {
 @media (prefers-reduced-motion: reduce) {
   .roles .chev { transition: none; }
 }
+
+/* ---------- 404 ---------- */
+
+body.lost {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--limewash) 75%);
+}
+.lost-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem var(--gutter, 1rem) 4rem;
+  text-align: center;
+}
+.lost .sprig {
+  position: static;
+  width: auto;
+  height: 10.5rem;
+}
+/* match the share card: buds rotate around their own centres in SVG space */
+.lost .sprig .buds ellipse { transform-box: view-box; }
+.lost h1 {
+  margin: 1.25rem 0 0;
+  font-family: var(--title-2);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 7vw, 3rem);
+  line-height: 1.15;
+}
+.lost h1::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 1px;
+  margin: 1.25rem auto 1.1rem;
+  background: var(--lavender);
+  opacity: 0.7;
+}
+.lost p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 360;
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  font-variation-settings: "SOFT" 100, "opsz" 24;
+}
+.lost .links { justify-content: center; margin-top: 1.75rem; }
